@@ -1,8 +1,0 @@
-1 . rien ne se passe dans main car la branch feature/favoris est totalement independant de main
-partie 2: 
-1. 
-
-Partie 3 — Questions de compréhension
-1. FavoriteButton peut être un StatelessWidget parce qu’il ne stocke ni ne modifie lui-même son état. Son affichage dépend du FavorisModel : `context.watch<FavorisModel>()` s’abonne aux changements, et `notifyListeners()` déclenche la reconstruction du widget.
-2. L’id du favori est stable lors du rechargement des destinations depuis json-server, tandis que chaque chargement peut créer de nouvelles instances de Destination. Les identifiants permettent donc de retrouver le même favori sans dépendre de l’égalité ou de l’identité des objets. Ici, la Map utilise l’id comme clé.
-3. Les favoris sont conservés uniquement en mémoire dans le FavorisModel. Un hot restart recrée l’application et ce modèle, donc sa Map est vide. Il faudrait une persistance (les stocker dans db.json par exemple) pour les conserver.
