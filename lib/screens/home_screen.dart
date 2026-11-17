@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tp3/models/destination.dart';
+import 'package:tp3/screens/favoris_screen.dart';
+import 'package:tp3/screens/reservation_screen.dart';
 
 import '../data/destinations.dart';
 import '../widgets/destination_card.dart';
@@ -152,7 +154,11 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       ),
       body: SafeArea(
-        child: _onglet==0? _construireExplorer():Text("bientot disponible"),
+        child: switch (_onglet) {
+          0 => _construireExplorer(),
+          1 => const FavorisScreen(),
+          _ => const Center(child: Text("bientot disponible")), 
+        },
       ),
     );
   }

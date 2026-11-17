@@ -67,7 +67,7 @@ class DestinationCard extends StatelessWidget {
                       Text(destination.note.toString()),
                       Spacer(),
                       Text('${destination.prix} DT'),
-                      FavoriteButton(key: ValueKey(destination.nom)),
+                      FavoriteButton(destination: destination),
                     ],
                   ),
                 ],

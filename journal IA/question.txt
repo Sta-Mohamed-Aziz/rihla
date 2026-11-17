@@ -1,0 +1,1 @@
+1 . rien ne se passe dans main car la branch feature/favoris est totalement independant de main
