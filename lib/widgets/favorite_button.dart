@@ -1,41 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tp3/models/destination.dart';
+import 'package:tp3/providers/favoris_model.dart';
 
 
-class FavoriteButton extends StatefulWidget {
-  const FavoriteButton({super.key});
-
-  @override
-  State<FavoriteButton> createState() => _FavoriteButtonState();
-}
-
-class _FavoriteButtonState extends State<FavoriteButton> {
-
-  bool _favori = false;
-
-  void _basculer() {
-    setState(() {
-      _favori = !_favori;
-    });
-
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(_favori ? 'Ajouté aux favoris' : 'Retiré des favoris'),
-          duration: const Duration(seconds: 1),
-        ),
-      );
-  }
-
+class FavoriteButton extends StatelessWidget {
+  
+  final Destination destination;
+  const FavoriteButton({super.key, required this.destination});
   @override
   Widget build(BuildContext context) {
-    
+    final favorisModel = context.watch<FavorisModel>();
+    final isFavorite = favorisModel.estFavori(destination);
+
     return IconButton(
-      onPressed: _basculer,
-      icon: Icon(
-        _favori ? Icons.favorite : Icons.favorite_border,
-        color: _favori ? Colors.red : null,
-      ),
+      onPressed: () {
+        context.read<FavorisModel>().basculer(destination);
+      },
+      icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
     );
   }
+  
 }
