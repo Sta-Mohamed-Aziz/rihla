@@ -58,6 +58,10 @@ Que fait exactement FavorisModel()..charger() ? Que se passerait-il avec Favoris
  Pourquoi oublier notifyListeners() à la fin de charger() serait-il un bug discret ?
 car les données vont etre affichées et lors de changement les données vont etre modifiées mais pas à l'affichage
 
+Palier 3: 
+1: on vérifie que le serveur a repndu correctement, sinon on risquait de sauvgarder une reponse d'erreur a la place des destinations.
+2: elle voit un message d'erreur et un bouton pour réssayer car il n'ya pas encore de cache avec les destinations à afficher.
+3: rethrow relance la mere erreur. le futurebuilder la recoit et affiche l'ecran d'érreur
 ## TP7 - Changement du theme
 
 Suggestion IA initiale : ajouter seulement le bouton dans l'AppBar.

@@ -88,9 +88,34 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       }
       final destinations = snapshot.data!;
-      return RefreshIndicator(
-        onRefresh: _recharger,
-        child: _construireAccueil(destinations)
+      final couleurs = Theme.of(context).colorScheme;
+      return Column(
+        children: [
+          if (ApiService.depuisCache)
+            Container(
+              width: double.infinity,
+              color: couleurs.secondaryContainer,
+              padding: const EdgeInsets.all(8),
+              child: Row(
+                children: [
+                  Icon(Icons.wifi_off, color: couleurs.onSecondaryContainer),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      'Hors connexion : données enregistrées',
+                      style: TextStyle(color: couleurs.onSecondaryContainer),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          Expanded(
+            child: RefreshIndicator(
+              onRefresh: _recharger,
+              child: _construireAccueil(destinations),
+            ),
+          ),
+        ],
       );
     });
   }
