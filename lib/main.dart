@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tp3/providers/favoris_model.dart';
+import 'package:tp3/providers/reglages_model.dart';
 
 import 'screens/home_screen.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
-    create:(_)=>FavorisModel()..charger(),
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => FavorisModel()..charger()),
+      ChangeNotifierProvider(create: (_) => ReglagesModel()..charger()),
+    ],
     child:const RihlaApp(),
-  ),
-  
-  );
+  ));
 }
 
 class RihlaApp extends StatelessWidget {
@@ -18,13 +20,23 @@ class RihlaApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     return MaterialApp(
+    final reglages = context.watch<ReglagesModel>();
+    const couleur = Color(0xFF0E7C86);
+    return MaterialApp(
       title: 'Rihla',
       debugShowCheckedModeBanner: false,
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: couleur,
+          brightness: Brightness.dark,
+        ),
+      ),
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF0E7C86)),
+        colorScheme: ColorScheme.fromSeed(seedColor: couleur),
       ),
+      themeMode: reglages.sombre ? ThemeMode.dark : ThemeMode.light,
       home: HomeScreen(),
     );
   }

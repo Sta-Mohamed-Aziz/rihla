@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tp3/models/destination.dart';
+import 'package:tp3/providers/favoris_model.dart';
+import 'package:tp3/providers/reglages_model.dart';
 import 'package:tp3/screens/favoris_screen.dart';
 import 'package:tp3/screens/reservation_screen.dart';
 
@@ -142,14 +145,29 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final sombre = context.watch<ReglagesModel>().sombre;
+    final nombre=context.watch<FavorisModel>().nombre;
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Rihla'),
+        actions: [
+          IconButton(
+            tooltip: sombre ? 'Passer au thème clair' : 'Passer au thème sombre',
+            icon: Icon(sombre ? Icons.light_mode : Icons.dark_mode),
+            onPressed: () => context.read<ReglagesModel>().basculerTheme(),
+          ),
+        ],
+      ),
       bottomNavigationBar: NavigationBar(destinations: [
         NavigationDestination(icon: Icon(Icons.explore),label:"explore"),
-        NavigationDestination(icon: Icon(Icons.favorite),label:"favorited"),
+        NavigationDestination(icon:Badge( isLabelVisible: nombre > 0,
+				label: Text('$nombre'),child:Icon(Icons.favorite)),label:"favorited"),
         NavigationDestination(icon: Icon(Icons.person),label:"profile"),
-      ],onDestinationSelected: (selectedIndex) {
+      ],
+      selectedIndex: _onglet
+      ,onDestinationSelected: (index) {
         setState(() {
-          _onglet = selectedIndex;
+          _onglet = index;
         });
       },
       ),

@@ -57,3 +57,9 @@ Que fait exactement FavorisModel()..charger() ? Que se passerait-il avec Favoris
 
  Pourquoi oublier notifyListeners() à la fin de charger() serait-il un bug discret ?
 car les données vont etre affichées et lors de changement les données vont etre modifiées mais pas à l'affichage
+
+## TP7 - Changement du theme
+
+Suggestion IA initiale : ajouter seulement le bouton dans l'AppBar.
+Decision : modifiee.
+Pourquoi : le bouton seul ne change pas le theme de MaterialApp et ne restaure pas le choix apres un redemarrage. J'ai relie ReglagesModel a themeMode et charge le choix au demarrage. J'ai aussi verifie la meme cle en lecture/ecriture, la valeur false par defaut et notifyListeners() dans charger() et basculerTheme().
