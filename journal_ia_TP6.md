@@ -44,3 +44,16 @@ Les branches n’ont pas changé les mêmes lignes de façon incompatible. Git a
 2. Que se passe-t-il si j'oublie de supprimer un marqueur `=======` ?
 
 `=======` est un marqueur de conflit, pas du code Dart valide. S’il reste dans le fichier, l’application ne compile pas. Il faut régler le conflit et supprimer tous les marqueurs.
+
+**TP 7**
+palier 1 :
+Pourquoi stocke-t-on des String JSON et pas directement des objets Destination ? 
+pour les enregistrer en db.json on doit les transformer en string json pour les sauvgarader comme objets json puis on les reconstruit en des objets destinations quand on va les utiliser
+
+Que fait exactement FavorisModel()..charger() ? Que se passerait-il avec FavorisModel().charger() ?
+..charger appelle la methode charger mais laisse l'objet initale donc elle charge les données, on l'utilise car les fonctions qu'on utilise sont async, si on utilise .charger favorismodel va charger la variable Future<void> comme elle est maintenant donc sans charger les données si ils changent
+
+
+
+ Pourquoi oublier notifyListeners() à la fin de charger() serait-il un bug discret ?
+car les données vont etre affichées et lors de changement les données vont etre modifiées mais pas à l'affichage
