@@ -44,3 +44,26 @@ Les branches n’ont pas changé les mêmes lignes de façon incompatible. Git a
 2. Que se passe-t-il si j'oublie de supprimer un marqueur `=======` ?
 
 `=======` est un marqueur de conflit, pas du code Dart valide. S’il reste dans le fichier, l’application ne compile pas. Il faut régler le conflit et supprimer tous les marqueurs.
+
+**TP 7**
+palier 1 :
+Pourquoi stocke-t-on des String JSON et pas directement des objets Destination ? 
+pour les enregistrer en db.json on doit les transformer en string json pour les sauvgarader comme objets json puis on les reconstruit en des objets destinations quand on va les utiliser
+
+Que fait exactement FavorisModel()..charger() ? Que se passerait-il avec FavorisModel().charger() ?
+..charger appelle la methode charger mais laisse l'objet initale donc elle charge les données, on l'utilise car les fonctions qu'on utilise sont async, si on utilise .charger favorismodel va charger la variable Future<void> comme elle est maintenant donc sans charger les données si ils changent
+
+
+
+ Pourquoi oublier notifyListeners() à la fin de charger() serait-il un bug discret ?
+car les données vont etre affichées et lors de changement les données vont etre modifiées mais pas à l'affichage
+
+Palier 3: 
+1: on vérifie que le serveur a repndu correctement, sinon on risquait de sauvgarder une reponse d'erreur a la place des destinations.
+2: elle voit un message d'erreur et un bouton pour réssayer car il n'ya pas encore de cache avec les destinations à afficher.
+3: rethrow relance la mere erreur. le futurebuilder la recoit et affiche l'ecran d'érreur
+## TP7 - Changement du theme
+
+Suggestion IA initiale : ajouter seulement le bouton dans l'AppBar.
+Decision : modifiee.
+Pourquoi : le bouton seul ne change pas le theme de MaterialApp et ne restaure pas le choix apres un redemarrage. J'ai relie ReglagesModel a themeMode et charge le choix au demarrage. J'ai aussi verifie la meme cle en lecture/ecriture, la valeur false par defaut et notifyListeners() dans charger() et basculerTheme().
